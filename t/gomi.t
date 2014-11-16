@@ -135,7 +135,7 @@ sub sendmail { #{{{
     print "\n";
     print "よろしくお願いします\n";
 } #}}}
-sub countup{
+sub countup{ #{{{
     # カウントup
     open (my $read,'<:encoding(UTF-8)',$_[0]) or die $!;
     my @line = <$read>;
@@ -152,4 +152,4 @@ sub countup{
         }
     }
     close $write;
-}
+} #}}}
