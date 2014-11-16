@@ -15,3 +15,8 @@
 1. gomi.plの`$send_address`を編集して送りたいメールアドレスにする
 1. cronか何かで月曜日に動かす
 
+# Docker
+
+    docker run -d -p 22 yaasita/docker-gomi.pl /usr/bin/supervisord
+
+https://registry.hub.docker.com/u/yaasita/docker-gomi.pl/
