@@ -3,8 +3,11 @@ use strict;
 use warnings;
 use utf8;
 use Encode;
+use FindBin;
 my $send_address = 'member@example.net';
 my @toban;
+
+chdir $FindBin::Bin;
 {
     # 当番選出
     open (my $fh,'<:encoding(UTF-8)','gomi.txt') or die $!;
