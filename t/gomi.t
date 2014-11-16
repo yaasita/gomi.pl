@@ -48,6 +48,7 @@ subtest 'sendmail' => sub { #{{{
     like $line[4],qr/Message-Id: <\d+$send_address>/;
     like $line[8],qr/^$/;
     like $line[9],qr/今週のゴミ当番は/;
+    like $line[11],qr#^\d{4}/\d{2}/\d{2}\(.\) - \d{4}/\d{2}/\d{2}\(.\)#;
     like $line[12],qr/・ほげ/;
     like $line[13],qr/・ふが/;
     like $line[15],qr/よろしくお願いします/;
