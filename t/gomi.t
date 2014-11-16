@@ -90,23 +90,21 @@ done_testing;
 
 sub toban{ #{{{
     # 当番選出
-    my %member;
     open (my $fh,'<:encoding(UTF-8)',$_[0]) or die $!;
+    my %member;
     while (<$fh>){
         next if /^\s*#/ or /^\s*$/;
         my ($name,$count) = split(/\s*,\s*/);
         $member{$name}=$count;
     }
-    {
-        my @sort_member = sort { $member{$a} <=> $member{$b} } keys %member;
-        my @kouho;
-        for (0..1){
-            my $n=$_;
-            @kouho = grep{ $member{$_} == $member{$sort_member[$n]} } @sort_member;
-            push(@toban,splice(@kouho,int rand @kouho+0,1)) for 1..2;
-        }
-        splice(@toban,2);
+    my @sort_member = sort { $member{$a} <=> $member{$b} } keys %member;
+    my @kouho;
+    for (0..1){
+        my $n=$_;
+        @kouho = grep{ $member{$_} == $member{$sort_member[$n]} } @sort_member;
+        push(@toban,splice(@kouho,int rand @kouho+0,1)) for 1..2;
     }
+    splice(@toban,2);
 } #}}}
 sub sendmail { #{{{
     # メール送信
