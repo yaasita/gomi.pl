@@ -61,14 +61,13 @@ my @toban;
     my @line = <$read>;
     close $read;
     open (my $write,'>:encoding(UTF-8)','gomi.txt') or die $!;
-    select $write;
     for (@line){
         if (/^$toban[0]/ or /^$toban[1]/){
             my ($name,$count) = split(/\s*,\s*/);
-            print "$name,",$count+1,"\n";
+            print $write "$name,",$count+1,"\n";
         }
         else {
-            print;
+            print $write $_;
         }
     }
     close $write;
