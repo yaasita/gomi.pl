@@ -39,22 +39,23 @@ my @toban;
     my $start = decode("UTF-8",`date +"%Y/%m/%d(%a)"`);
     my $end   = decode("UTF-8",`date +"%Y/%m/%d(%a)" --date "4 days"`);
     chomp($start,$end);
-    select $sendmail;
-    print 
-        "From: $send_address"."\n".
-        "To: $send_address"."\n".
-        "Content-Type: text/plain; charset=\"ISO-2022-JP\""."\n".
-        "Message-Id: <$message_id>"."\n".
-        "Date: $date"."\n".
-        # 今週のゴミ当番
-        "Subject: =?ISO-2022-JP?B?GyRCOiM9NSROJTQlX0V2SFYbKEI=?="."\n".
-        "Content-Transfer-Encoding: 7bit"."\n";
-    print "今週のゴミ当番は以下の方です\n";
-    print "\n";
-    print "$start - $end\n";
-    print "・$_\n" for @toban;
-    print "\n";
-    print "よろしくお願いします\n";
+    print $sendmail
+          "From: $send_address\n"
+        . "To: $send_address\n"
+        . "Content-Type: text/plain; charset=\"ISO-2022-JP\"\n"
+        . "Message-Id: <$message_id>\n"
+        . "Date: $date\n"
+        # Subject: 今週のゴミ当番
+        . "Subject: =?ISO-2022-JP?B?GyRCOiM9NSROJTQlX0V2SFYbKEI=?=\n"
+        . "Content-Transfer-Encoding: 7bit\n"
+        . "\n"
+        . "今週のゴミ当番は以下の方です\n"
+        . "\n"
+        . "$start - $end\n";
+    print $sendmail "・$_\n" for @toban;
+    print $sendmail
+          "\n"
+        . "よろしくお願いします\n";
 }
 {
     # カウントup
