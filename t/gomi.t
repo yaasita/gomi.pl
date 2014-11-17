@@ -13,8 +13,9 @@ use File::Temp qw(tempfile tempdir);
 my @toban;
 my $send_address='hoge@hoge.com';
 
+chdir $FindBin::Bin;
+
 subtest 'toban' => sub { #{{{
-    chdir $FindBin::Bin;
     ok(toban("1.txt"));
     diag "1 => @toban";
     my @toban1 = sort @toban;
@@ -35,8 +36,6 @@ subtest 'toban' => sub { #{{{
 
 }; #}}}
 subtest 'sendmail' => sub { #{{{
-    #chdir tempdir(CLEANUP => 0);
-    chdir $FindBin::Bin;
     @toban=('ほげ','ふが');
     ok(sendmail("1.eml"));
     open (my $fh,'<:encoding(ISO-2022-JP)','1.eml') or die $!;
@@ -55,8 +54,6 @@ subtest 'sendmail' => sub { #{{{
     close $fh;
 }; #}}}
 subtest 'countup' => sub { #{{{
-    chdir $FindBin::Bin;
-
     {
         @toban = qw(one two);
         system("cp c1-before.txt c1-after.txt") and die $!;
