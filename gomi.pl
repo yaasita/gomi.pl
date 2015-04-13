@@ -10,7 +10,7 @@ my @toban;
 chdir $FindBin::Bin;
 {
     # 当番選出
-    open (my $fh,'<:encoding(UTF-8)','gomi.txt') or die $!;
+    open (my $fh,'<:encoding(UTF-8)','toban.txt') or die $!;
     my %member;
     while (<$fh>){
         next if /^\s*#/ or /^\s*$/;
@@ -60,10 +60,10 @@ chdir $FindBin::Bin;
 }
 {
     # カウントup
-    open (my $read,'<:encoding(UTF-8)','gomi.txt') or die $!;
+    open (my $read,'<:encoding(UTF-8)','toban.txt') or die $!;
     my @line = <$read>;
     close $read;
-    open (my $write,'>:encoding(UTF-8)','gomi.txt') or die $!;
+    open (my $write,'>:encoding(UTF-8)','toban.txt') or die $!;
     for (@line){
         if (/^$toban[0]/ or /^$toban[1]/){
             my ($name,$count) = split(/\s*,\s*/);
